@@ -1,5 +1,6 @@
-﻿using System.Linq.Expressions;
-namespace MrPanchoRestaurant.Models
+﻿using MrPanchoRestaurant.Models;
+using System.Linq.Expressions;
+namespace MrPanchoRestaurant.Repositories.Interfaces
 {
     public interface IRepository<T> where T: class
     {

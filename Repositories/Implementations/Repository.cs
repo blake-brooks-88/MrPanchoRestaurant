@@ -1,9 +1,11 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using MrPanchoRestaurant.Data;
+using MrPanchoRestaurant.Models;
+using MrPanchoRestaurant.Repositories.Interfaces;
 using System.Collections.Generic;
 
-namespace MrPanchoRestaurant.Models
+namespace MrPanchoRestaurant.Repositories.Implementations
 {
     public class Repository<T> : IRepository<T> where T : class
     {
