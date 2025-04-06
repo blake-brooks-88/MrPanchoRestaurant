@@ -37,14 +37,20 @@ namespace MrPanchoRestaurant.Controllers
             }
             else
             {
+                Product product = await products.GetByIdAsync(id, new QueryOptions<Product>
+                {
+                    Includes = "ProductIngredients.Ingredient, Category"
+                });
                 ViewBag.Operation = "Edit";
-                return View();
+                return View(product);
             }
         }
 
         [HttpPost]
         public async Task<IActionResult> AddEdit(Product product, int[] ingredientIds, int catId)
         {
+            ViewBag.Ingredients = await ingredients.GetAllAsync();
+            ViewBag.Categories = await categories.GetAllAsync();
             if (ModelState.IsValid)
             {
                 if (product.ImageFile != null)
@@ -58,22 +64,60 @@ namespace MrPanchoRestaurant.Controllers
                     }
                     product.ImageUrl = uniqueFileName;
                 }
-            }
 
-            if (product.ProductId == 0)
-            {
-                ViewBag.Ingredients = await ingredients.GetAllAsync();
-                ViewBag.Categories = await categories.GetAllAsync();
-                product.CategoryId = catId;
-
-                foreach (int id in ingredientIds)
+                if (product.ProductId == 0)
                 {
-                    product.ProductIngredients?.Add(new ProductIngredient { IngredientId = id, ProductId = product.ProductId });
+                    product.CategoryId = catId;
+
+                    foreach (int id in ingredientIds)
+                    {
+                        product.ProductIngredients?.Add(new ProductIngredient { IngredientId = id, ProductId = product.ProductId });
+                    }
+                    await products.AddAsync(product);
+                    return RedirectToAction("Index", "Product");
+                }
+                else
+                {
+                    var existingProduct = await products.GetByIdAsync(product.ProductId, new QueryOptions<Product> { Includes = "ProductIngredients" });
+                    
+                    if (existingProduct == null)
+                    {
+                        ModelState.AddModelError("", "Product not found.");
+                        ViewBag.Ingredients = await ingredients.GetAllAsync();
+                        ViewBag.Categories = await categories.GetAllAsync();
+                        return View(product);
+                    }
+
+                    existingProduct.Name = product.Name;
+                    existingProduct.Description = product.Description;
+                    existingProduct.Price = product.Price;
+                    existingProduct.Stock = product.Stock;
+                    existingProduct.CategoryId = catId;
+
+                    existingProduct.ProductIngredients?.Clear();
+                    foreach (int id in ingredientIds)
+                    {
+                        existingProduct.ProductIngredients?.Add(new ProductIngredient { IngredientId = id, ProductId = product.ProductId });
+                    }
+
+                    try
+                    {
+                        await products.UpdateAsync(existingProduct);
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("", $"Error: {ex.GetBaseException().Message}");
+                        ViewBag.Ingredients = await ingredients.GetAllAsync();
+                        ViewBag.Categories = await categories.GetAllAsync();
+                        return View(product);
+                    }
+
+   
                 }
             }
 
-            await products.AddAsync(product);
             return RedirectToAction("Index", "Product");
+
         }
     }
 }
