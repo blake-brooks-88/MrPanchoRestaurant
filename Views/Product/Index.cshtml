@@ -8,6 +8,13 @@
 <div class="row">
 	@foreach(Product prod in Model)
 	{
-		<div class="col-md-4">@prod.Name</div>
+		<div class="col-md-4">
+			<form asp-action="delete" asp-controller="product" method="post">
+				<input type="hidden" asp-for="@prod.ProductId" name="id" />
+				<div class="card" style="width: 18rem;">
+						<img src="@Url.Content("~/images/" + prod?.ImageUrl)" class="card-img-top fixed-image-height" alt="@prod.Description" />
+				</div>
+			</form>
+		</div>
 	}
 </div>
