@@ -1,4 +1,4 @@
-﻿namespace MrPanchoRestaurant.Models
+﻿namespace MrPanchoRestaurant.Models.Entities.Menu
 {
     public class ProductIngredient
     {

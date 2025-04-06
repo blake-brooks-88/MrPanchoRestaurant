@@ -1,4 +1,6 @@
-﻿namespace MrPanchoRestaurant.Models
+﻿using MrPanchoRestaurant.Models.Entities.Menu;
+
+namespace MrPanchoRestaurant.Models.ViewModels.Ordering
 {
     public class OrderViewModel
     {

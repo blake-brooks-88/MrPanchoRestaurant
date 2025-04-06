@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MrPanchoRestaurant.Data;
-using MrPanchoRestaurant.Models;
+using MrPanchoRestaurant.Models.Entities.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 

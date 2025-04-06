@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using MrPanchoRestaurant.Models.Entities.Ordering;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MrPanchoRestaurant.Models
+namespace MrPanchoRestaurant.Models.Entities.Menu
 {
     public class Product
     {

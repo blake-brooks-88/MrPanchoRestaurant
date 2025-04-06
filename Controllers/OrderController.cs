@@ -2,7 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MrPanchoRestaurant.Data;
+using MrPanchoRestaurant.Extensions;
 using MrPanchoRestaurant.Models;
+using MrPanchoRestaurant.Models.Entities.Identity;
+using MrPanchoRestaurant.Models.Entities.Menu;
+using MrPanchoRestaurant.Models.Entities.Ordering;
+using MrPanchoRestaurant.Models.ViewModels.Ordering;
 using MrPanchoRestaurant.Repositories.Implementations;
 
 namespace MrPanchoRestaurant.Controllers

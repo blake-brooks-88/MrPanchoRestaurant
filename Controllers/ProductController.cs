@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MrPanchoRestaurant.Data;
 using MrPanchoRestaurant.Models;
+using MrPanchoRestaurant.Models.Entities.Menu;
+using MrPanchoRestaurant.Models.Menu;
 using MrPanchoRestaurant.Repositories.Implementations;
 
 namespace MrPanchoRestaurant.Controllers

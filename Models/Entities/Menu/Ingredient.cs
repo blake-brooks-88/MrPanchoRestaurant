@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-namespace MrPanchoRestaurant.Models
+namespace MrPanchoRestaurant.Models.Entities.Menu
 {
     public class Ingredient
     {

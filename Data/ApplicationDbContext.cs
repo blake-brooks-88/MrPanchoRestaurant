@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MrPanchoRestaurant.Models;
+using MrPanchoRestaurant.Models.Entities.Identity;
+using MrPanchoRestaurant.Models.Entities.Menu;
+using MrPanchoRestaurant.Models.Entities.Ordering;
 
 namespace MrPanchoRestaurant.Data
 {
