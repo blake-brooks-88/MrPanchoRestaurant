@@ -36,7 +36,6 @@ namespace MrPanchoRestaurant.Controllers
 
         [HttpPost]
         [Authorize]
-
         public async Task<IActionResult> AddItem(int prodId, int prodQty)
         {
             var product = await _context.Products.FindAsync(prodId);
@@ -74,6 +73,70 @@ namespace MrPanchoRestaurant.Controllers
 
             return RedirectToAction("Create", model);
         }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Cart()
+        {
+            var model = HttpContext.Session.Get<OrderViewModel>("OrderViewModel");
+
+            if (model == null || model.OrderItems.Count == 0)
+            {
+                return RedirectToAction("Create");
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> PlaceOrder()
+        {
+            var model = HttpContext.Session.Get<OrderViewModel>("OrderViewModel");
+            if (model == null || model.OrderItems.Count == 0)
+            {
+                return RedirectToAction("Create");
+            }
+
+            Order order = new Order
+            {
+                OrderDate = DateTime.Now,
+                TotalAmount = model.TotalAmount,
+                UserId = _userManager.GetUserId(User)
+            };
+
+            foreach (var item in order.OrderItems)
+            {
+                order.OrderItems.Add(new OrderItem
+                {
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    Price = item.Price
+                });
+
+            }
+            
+            await _orders.AddAsync(order);
+
+            HttpContext.Session.Remove("OrderViewModel");
+
+            return RedirectToAction("ViewOrders");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> ViewOrders()
+        {
+            var userId = _userManager.GetUserId(User);
+
+            var userOrders = await _orders.GetAllByIdAsync(userId, "UserId", new QueryOptions<Order>
+            {
+                Includes = "OrderItems.Product"
+            });
+
+            return View(userOrders);
+        }
+
         public IActionResult Index()
         {
             return View();
