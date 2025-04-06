@@ -105,7 +105,7 @@ namespace MrPanchoRestaurant.Controllers
                 UserId = _userManager.GetUserId(User)
             };
 
-            foreach (var item in order.OrderItems)
+            foreach (var item in model.OrderItems)
             {
                 order.OrderItems.Add(new OrderItem
                 {
