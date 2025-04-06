@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Product>
+@{
+	ViewBag.Title = "Mr. Pancho's Menu Items";
+}
+
+<h2>Mr. Pancho's Menu Items</h2>
+
+<div class="row">
+	@foreach(Product prod in Model)
+	{
+		<div class="col-md-4">@prod.Name</div>
+	}
+</div>
