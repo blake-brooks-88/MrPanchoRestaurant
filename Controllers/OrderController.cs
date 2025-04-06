@@ -8,6 +8,7 @@ using MrPanchoRestaurant.Models.Entities.Identity;
 using MrPanchoRestaurant.Models.Entities.Menu;
 using MrPanchoRestaurant.Models.Entities.Ordering;
 using MrPanchoRestaurant.Models.ViewModels.Ordering;
+using MrPanchoRestaurant.Repositories.Common;
 using MrPanchoRestaurant.Repositories.Implementations;
 
 namespace MrPanchoRestaurant.Controllers

@@ -1,4 +1,4 @@
-﻿namespace MrPanchoRestaurant.Models.Entities.Ordering
+﻿namespace MrPanchoRestaurant.Models.ViewModels.Ordering
 {
     public class OrderItemViewModel
     {

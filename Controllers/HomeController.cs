@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MrPanchoRestaurant.Models;
+using MrPanchoRestaurant.Models.ViewModels;
 
 namespace MrPanchoRestaurant.Controllers
 {

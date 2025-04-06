@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
 
-namespace MrPanchoRestaurant.Models
+namespace MrPanchoRestaurant.Repositories.Common
 {
     public class QueryOptions<T> where T : class
     {
-        public Expression<Func<T, Object>> OrderBy { get; set; } = null!;
+        public Expression<Func<T, object>> OrderBy { get; set; } = null!;
         public Expression<Func<T, bool>> Where { get; set; } = null!;
         private string[] includes = Array.Empty<string>();
 

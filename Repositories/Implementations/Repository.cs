@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using MrPanchoRestaurant.Data;
-using MrPanchoRestaurant.Models;
+using MrPanchoRestaurant.Repositories.Common;
 using MrPanchoRestaurant.Repositories.Interfaces;
 using System.Collections.Generic;
 

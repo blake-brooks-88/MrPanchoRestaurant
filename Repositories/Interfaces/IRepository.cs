@@ -1,4 +1,4 @@
-﻿using MrPanchoRestaurant.Models;
+﻿using MrPanchoRestaurant.Repositories.Common;
 using System.Linq.Expressions;
 namespace MrPanchoRestaurant.Repositories.Interfaces
 {

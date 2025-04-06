@@ -18,6 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\ViewModels\Identity\" />
+    <Folder Include="Models\ViewModels\Menu\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

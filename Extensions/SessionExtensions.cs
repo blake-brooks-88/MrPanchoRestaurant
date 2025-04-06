@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace MrPanchoRestaurant.Models
+namespace MrPanchoRestaurant.Extensions
 {
     public static class SessionExtensions
     {
@@ -14,7 +14,7 @@ namespace MrPanchoRestaurant.Models
             var json = session.GetString(key);
             if (string.IsNullOrEmpty(json))
             {
-                return default(T);
+                return default;
             }
             else
             {
