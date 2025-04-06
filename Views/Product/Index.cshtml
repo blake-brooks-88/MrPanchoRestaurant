@@ -4,6 +4,7 @@
 }
 
 <h2>Mr. Pancho's Menu Items</h2>
+<a asp-action="AddEdit" asp-controller="Product" class="btn btn-primary">Create New Item</a>
 
 <div class="row">
 	@foreach(Product prod in Model)
@@ -13,6 +14,12 @@
 				<input type="hidden" asp-for="@prod.ProductId" name="id" />
 				<div class="card" style="width: 18rem;">
 						<img src="@Url.Content("~/images/" + prod?.ImageUrl)" class="card-img-top fixed-image-height" alt="@prod.Description" />
+						<div class="card-body">
+							<h5 class="card-title">@prod.Name</h5>
+							<p class="card-text">@prod.Description</p>
+							<p class="card-text">@prod.Price.ToString("C")</p>
+							<p class="card-text">Quantity In Stock: @prod.Stock</p>
+						</div>
 				</div>
 			</form>
 		</div>
