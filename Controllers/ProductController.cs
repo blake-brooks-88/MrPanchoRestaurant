@@ -3,6 +3,7 @@ using MrPanchoRestaurant.Data;
 using MrPanchoRestaurant.Models.Entities.Menu;
 using MrPanchoRestaurant.Repositories.Common;
 using MrPanchoRestaurant.Repositories.Implementations;
+using MrPanchoRestaurant.Services.Interfaces;
 
 namespace MrPanchoRestaurant.Controllers
 {
@@ -11,14 +12,14 @@ namespace MrPanchoRestaurant.Controllers
         private Repository<Product> products;
         private Repository<Ingredient> ingredients;
         private Repository<Category> categories;
-        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IImageHandler _imageHandler;
 
-        public ProductController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        public ProductController(ApplicationDbContext context, IImageHandler imageHandler)
         {
             products = new Repository<Product>(context);
             ingredients = new Repository<Ingredient>(context);
             categories = new Repository<Category>(context);
-            _webHostEnvironment = webHostEnvironment;
+            _imageHandler = imageHandler;
         }
 
         public async Task<IActionResult> Index()
@@ -57,13 +58,7 @@ namespace MrPanchoRestaurant.Controllers
             {
                 if (product.ImageFile != null)
                 {
-                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + product.ImageFile.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await product.ImageFile.CopyToAsync(fileStream);
-                    }
+                    string uniqueFileName = await _imageHandler.SaveImageAsync(product.ImageFile);
                     product.ImageUrl = uniqueFileName;
                 }
 
