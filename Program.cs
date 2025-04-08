@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MrPanchoRestaurant.Data;
 using MrPanchoRestaurant.Models.Entities.Identity;
+using MrPanchoRestaurant.Services.Interfaces;
+using MrPanchoRestaurant.Services.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,8 @@ builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
+
+builder.Services.AddScoped<IImageHandler, ImageHandler>();
 
 var app = builder.Build();
 
